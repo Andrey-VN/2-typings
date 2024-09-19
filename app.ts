@@ -12,7 +12,7 @@ function makeOrdinal(words: string): string {
 }
 //////////
 
-enum ЕenPower {
+const enum TenPower {
 	TEN = 10,
 	ONE_HUNDRED = 100,
 	ONE_THOUSAND = 1_000,
@@ -71,38 +71,38 @@ function generateWords(number: number, words: string[] = []): string {
 		remainder = 0;
 		word = LESS_THAN_TWENTY[number];
 
-	} else if (number < ЕenPower.ONE_HUNDRED) {
-		remainder = number % ЕenPower.TEN;
-		word = TENTHS_LESS_THAN_HUNDRED[Math.floor(number / ЕenPower.TEN)];
+	} else if (number < TenPower.ONE_HUNDRED) {
+		remainder = number % TenPower.TEN;
+		word = TENTHS_LESS_THAN_HUNDRED[Math.floor(number / TenPower.TEN)];
 		// In case of remainder, we need to handle it here to be able to add the “-”
 		if (remainder) {
 			word += '-' + LESS_THAN_TWENTY[remainder];
 			remainder = 0;
 		}
 
-	} else if (number < ЕenPower.ONE_THOUSAND) {
-		remainder = number % ЕenPower.ONE_HUNDRED;
-		word = generateWords(Math.floor(number / ЕenPower.ONE_HUNDRED)) + ' hundred';
+	} else if (number < TenPower.ONE_THOUSAND) {
+		remainder = number % TenPower.ONE_HUNDRED;
+		word = generateWords(Math.floor(number / TenPower.ONE_HUNDRED)) + ' hundred';
 
-	} else if (number < ЕenPower.ONE_MILLION) {
-		remainder = number % ЕenPower.ONE_THOUSAND;
-		word = generateWords(Math.floor(number / ЕenPower.ONE_THOUSAND)) + ' thousand,';
+	} else if (number < TenPower.ONE_MILLION) {
+		remainder = number % TenPower.ONE_THOUSAND;
+		word = generateWords(Math.floor(number / TenPower.ONE_THOUSAND)) + ' thousand,';
 
-	} else if (number < ЕenPower.ONE_BILLION) {
-		remainder = number % ЕenPower.ONE_MILLION;
-		word = generateWords(Math.floor(number / ЕenPower.ONE_MILLION)) + ' million,';
+	} else if (number < TenPower.ONE_BILLION) {
+		remainder = number % TenPower.ONE_MILLION;
+		word = generateWords(Math.floor(number / TenPower.ONE_MILLION)) + ' million,';
 
-	} else if (number < ЕenPower.ONE_TRILLION) {
-		remainder = number % ЕenPower.ONE_BILLION;
-		word = generateWords(Math.floor(number / ЕenPower.ONE_BILLION)) + ' billion,';
+	} else if (number < TenPower.ONE_TRILLION) {
+		remainder = number % TenPower.ONE_BILLION;
+		word = generateWords(Math.floor(number / TenPower.ONE_BILLION)) + ' billion,';
 
-	} else if (number < ЕenPower.ONE_QUADRILLION) {
-		remainder = number % ЕenPower.ONE_TRILLION;
-		word = generateWords(Math.floor(number / ЕenPower.ONE_TRILLION)) + ' trillion,';
+	} else if (number < TenPower.ONE_QUADRILLION) {
+		remainder = number % TenPower.ONE_TRILLION;
+		word = generateWords(Math.floor(number / TenPower.ONE_TRILLION)) + ' trillion,';
 
 	} else if (number <= MAX) {
-		remainder = number % ЕenPower.ONE_QUADRILLION;
-		word = generateWords(Math.floor(number / ЕenPower.ONE_QUADRILLION)) +
+		remainder = number % TenPower.ONE_QUADRILLION;
+		word = generateWords(Math.floor(number / TenPower.ONE_QUADRILLION)) +
 			' quadrillion,';
 		words.push(word);
 	}
